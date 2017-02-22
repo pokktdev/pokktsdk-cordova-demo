@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Campaign Selector Screen</title>
+    </head>
+    <body style="background-color: #37BC9C">
+        <div align="center">
+            <img src="img/pokktlogo.png" width="200" height="200" align="center"><br/>
+            <h1>Points Earned: <p1 id="labelPointsEarned">0</p1></h1>
+            <br/><br/>
+            <input type="button" style="background-color: #967ADC" value="Get Offerwall (Any Asset Value)" onclick="offerwallController.getOfferwallAnyValue();" class="demo"/><br/><br/>
+            <label>Fixed Asset Value: <input id="textAssetValue" type="text" value="0"/></label><br/><br/>
+            <input type="button" style="background-color: #4A89DC" value="Get Offerwall (Fixed Asset Value)" onclick="offerwallController.getOfferwallFixedValue();" class="demo"/><br/><br/>
+            <input type="button" style="background-color: #967ADC" value="Get Pending Coins" onclick="offerwallController.getPendingCoins();" class="demo"/><br/><br/><br/>
+            <input type="button" style="background-color: #FCFCFC" value="Export Log" onclick="offerwallController.exportLog();" class="demo-small"/><br/>
+        </div>
+
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/offerwallScreenController.js"></script>
+        <script type="text/javascript">
+            offerwallController.initialize();
+        </script>
+    </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>SampleApp</title>
+    </head>
+    <body>
+        <div align="center">
+            <img src="img/pokktlogo.png" width="200" height="200" align="center"><br/>
+            <input id="videoAd" type="button" style="background-color: #4A89DC" value="Video Ad" onclick="app.onClickAdDemoScreen1();" class="demo"/><br/><br/>
+            <input id="interstitialAd" type="button" style="background-color: #4A89DC" value="Interstitial Ad" onclick="app.onClickAdDemoScreen2();" class="demo"/><br/><br/>
+            <input id="more" type="button" style="background-color: #4A89DC" value="More" onclick="app.onClickAdDemoScreen1();" class="demo"/><br/><br/>
+            <!--<input id="buttonInitPokkt" type="button" style="background-color: #967ADC" value="Init Pokkt First!" onclick="app.onClickInitPokkt();" class="demo-small"/><br/><br/>-->
+            <!--<input id="buttonAdDemoScreen1" type="button" style="background-color: #4A89DC" value="Demo Screen 1" onclick="app.onClickAdDemoScreen1();" class="demo" disabled/><br/><br/>-->
+            <!--<input id="buttonAdDemoScreen2" type="button" style="background-color: #4A89DC" value="Demo Screen 2" onclick="app.onClickAdDemoScreen2();" class="demo" disabled/><br/><br/>-->
+            <!--<input id="buttonShowBanner" type="button" style="background-color: #4A89DC" value="Show Banner" onclick="app.onClickShowBanner();" class="demo" disabled/><br/><br/>-->
+            <!--<input id="buttonDemoOfferwall" type="button" style="background-color: #967ADC" value="Demo Offerwall" onclick="app.onClickDemoOfferwall();" class="demo" disabled/><br/><br/>-->
+            <input type="button" style="background-color: #FCFCFC" value="Export Log" onclick="app.exportLog();" class="demo-small"/><br/>
+        </div>
+
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+    </body>
+</html>

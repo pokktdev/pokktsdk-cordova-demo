@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="cordova-plugin-pokkt" version="1.0.0">
+    
+ 	<engines>
+	    <engine name="cordova" version=">=3.8.0" />
+	</engines>
+ 	
+	<name>PokktCordovaPlugin</name>
+	<description>Cordova extension for Pokkt SDK</description>
+	<author>Xtreme</author>
+	<license>Apache 2.0</license>
+	<keywords>pokkt</keywords>
+	
+	<js-module src="PokktAds.js" name="PokktAds">
+	    <clobbers target="PokktExtension" />
+  	</js-module>
+	
+	<!-- android -->
+	<platform name="android">
+		<config-file target="res/xml/config.xml" parent="/*">
+			<feature name="PokktNativeExtension">
+				<param name="android-package" value="com.pokkt.plugin.PokktNativeExtension"/>
+			</feature>
+		</config-file>
+		
+		<config-file target="AndroidManifest.xml" parent="/manifest">
+		    <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            
+            <!-- Optional -->
+            <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+            <uses-permission android:name="android.permission.WAKE_LOCK" />
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+            <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+            <uses-permission android:name="android.permission.VIBRATE" />
+            <uses-permission android:name="android.permission.GET_TASKS" />
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+            <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+            <uses-permission android:name="android.permission.RECORD_AUDIO" />
+            <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
+            <uses-permission android:name="android.permission.READ_CALENDAR" />
+            <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+            <uses-permission android:name="android.permission.CALL_PHONE" />
+            <uses-permission android:name="android.permission.SEND_SMS" />
+            <uses-permission android:name="android.permission.CAMERA"/>
+            
+            <!-- 
+             <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+		    <uses-permission android:name="android.permission.WAKE_LOCK" />
+		    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+             -->
+		</config-file>
+		
+		<!-- pokkt related AndroidManifest.xml entries -->
+		<config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity
+            android:name="com.pokkt.sdk.userinterface.presenter.activity.PokktAdActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="fullSensor"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified" />
+            
+            <service
+            android:name="com.pokkt.sdk.notification.NotificationService"
+            android:exported="false"
+            android:label="PokktNotificationService" />
+            
+            <!-- Need to check this
+             <meta-data
+             android:name="com.google.android.gms.version"
+             android:value="@integer/google_play_services_version" /> -->
+            
+		</config-file>
+		
+<!--		<source-file src="android/res/drawable/pokkt_circle.xml" target-dir="res/drawable/"/>-->
+<!--		<source-file src="android/res/drawable/pokkt_progress_bar.xml" target-dir="res/drawable/"/>-->
+<!--		<source-file src="android/res/drawable/close_button_normal.png" target-dir="res/drawable/"/>-->
+<!--		<source-file src="android/res/drawable/close_button_pressed.png" target-dir="res/drawable/"/>-->
+<!--		-->
+<!--		<source-file src="android/res/layout/pokkt_banner_layout.xml" target-dir="res/layout/"/>-->
+<!--		<source-file src="android/res/layout/pokkt_video_layout.xml" target-dir="res/layout/"/>-->
+<!--		<source-file src="android/res/layout/pokkt_web_layout.xml" target-dir="res/layout/"/>-->
+<!--		-->
+<!--		<source-file src="android/res/values/ids.xml" target-dir="res/values/"/>-->
+
+		<!-- <source-file src="android/src/PokktNativeExtension.java" target-dir="src/com/pokkt/cordova/" /> -->
+		<source-file src="android/libs/PAPCordova.jar" target-dir="libs" framework="true" />
+		<!-- <source-file src="android/libs/PokktMediation.jar" target-dir="libs" framework="true" /> -->
+		<source-file src="android/libs/PokktSDK_v6.0.jar" target-dir="libs" framework="true" />
+		<source-file src="android/libs/comScore.jar" target-dir="libs" framework="true" />
+		<source-file src="android/libs/moat.jar" target-dir="libs" framework="true" />
+	</platform>
+	
+	<!-- ios -->
+	<platform name="ios">
+		<config-file target="config.xml" parent="/*">
+			<feature name="PokktNativeExtension">
+				<param name="ios-package" value="PokktNativeExtension"/>
+			</feature>
+		</config-file>
+		
+		<!-- pokkt related Info.plist entries -->
+		<config-file target="*-Info.plist" parent="NSAppTransportSecurity">
+            <!-- <key>NSAppTransportSecurity</key> -->
+            <dict>
+                <key>NSExceptionDomains</key>
+                <dict>
+                    <key>pokkt.com</key>
+                    <dict>
+                        <key>NSIncludesSubdomains</key>
+                        <true/>
+                        <key>NSExceptionAllowsInsecureHTTPLoads</key>
+                        <true/>
+                        <key>NSExceptionRequiresForwardSecrecy</key>
+                        <false/>
+                        <key>NSExceptionMinimumTLSVersion</key>
+                        <string>TLSv1.2</string>
+                        <key>NSThirdPartyExceptionAllowsInsecureHTTPLoads</key>
+                        <false/>
+                        <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+                        <true/>
+                        <key>NSThirdPartyExceptionMinimumTLSVersion</key>
+                        <string>TLSv1.2</string>
+                        <key>NSRequiresCertificateTransparency</key>
+                        <false/>
+                    </dict>
+                    <key>cloudfront.net</key>
+                    <dict>
+                        <key>NSIncludesSubdomains</key>
+                        <true/>
+                        <key>NSExceptionAllowsInsecureHTTPLoads</key>
+                        <true/>
+                        <key>NSExceptionRequiresForwardSecrecy</key>
+                        <false/>
+                        <key>NSExceptionMinimumTLSVersion</key>
+                        <string>TLSv1.2</string>
+                        <key>NSThirdPartyExceptionAllowsInsecureHTTPLoads</key>
+                        <false/>
+                        <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+                        <true/>
+                        <key>NSThirdPartyExceptionMinimumTLSVersion</key>
+                        <string>TLSv1.2</string>
+                        <key>NSRequiresCertificateTransparency</key>
+                        <false/>
+                    </dict>
+                </dict>
+            </dict>
+		</config-file>
+		
+		<source-file src="ios/PokktNativeExtension.mm" />
+		<framework src="ios/ComScore.framework" custom="true"/>
+		<framework src="ios/PokktSDK.framework" custom="true"/>
+		
+		<resource-file src="ios/PokktSDK.bundle" />
+		
+		<framework src="CoreData.framework" />
+		<framework src="Foundation.framework" />
+		<framework src="MediaPlayer.framework" />
+		<framework src="SystemConfiguration.framework" />
+		<framework src="UIKit.framework" />
+		<framework src="CoreTelephony.framework" />
+		<framework src="EventKit.framework" />
+		<framework src="AdSupport.framework" />
+		<framework src="CoreGraphics.framework" />
+		<framework src="CoreMotion.framework" />
+		<framework src="EventKitUI.framework" />
+		<framework src="MessageUI.framework" />
+		<framework src="CoreLocation.framework" />
+		<framework src="AVFoundation.framework" />
+		<framework src="libc++.tbd" />
+
+	</platform>
+</plugin>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Campaign Selector Screen</title>
+    </head>
+    <body style="background-color: #37BC9C">
+        <div align="center">
+            <img src="img/pokktlogo.png" width="200" height="200" align="center"><br/>
+            <p id="labelScreenName">[screen-name]</p>
+            <h1 id="labelPointsEarned">Points Earned: 0</h1>
+            <p id="labelStatus">[perform an action]</p>
+            <br/><br/>
+
+            <input id="buttonCacheRewardedAd" type="button" style="background-color: #4A89DC" value="Cache Rewarded" onclick="adController.onClickCacheRewardedAd(true);" class="demo"/><br/><br/>
+            <input id="buttonCacheNonRewardedAd" type="button" style="background-color: #967ADC" value="Cache Non-Rewarded" onclick="adController.onClickCacheNonRewardedAd(true);" class="demo"/><br/><br/>
+
+            <input id="buttonShowRewardedAd" type="button" style="background-color: #4A89DC" value="Show Rewarded" onclick="adController.onClickShowRewardedAd(true);" class="demo"/><br/><br/>
+            <input id="buttonShowNonRewardedAd" type="button" style="background-color: #967ADC" value="Show Non-Rewarded" onclick="adController.onClickShowNonRewardedAd(true);" class="demo"/><br/><br/>
+
+            <!--<input id="videoAd" type="button" style="background-color: #4A89DC" value="Video Ad" onclick="adController.onClickCacheRewardedAd(false);" class="demo"/><br/><br/>-->
+            <!--<input id="interstitialAd" type="button" style="background-color: #4A89DC" value="Interstitial Ad" onclick="adController.onClickCacheRewardedAd(false);" class="demo"/><br/><br/>-->
+
+          <!--  <input id="buttonCacheRewardedAd" type="button" style="background-color: #4A89DC" value="Cache Rewarded Ad" onclick="adController.onClickCacheRewardedAd(false);" class="demo"/><br/><br/> 
+            <input id="buttonCacheNonRewardedAd" type="button" style="background-color: #967ADC" value="Cache Non-Rewarded Ad" onclick="adController.onClickCacheNonRewardedAd(false);" class="demo"/><br/><br/>
+
+            <input id="buttonShowRewardedAd" type="button" style="background-color: #4A89DC" value="Show Rewarded Ad" onclick="adController.onClickShowRewardedAd(false);" class="demo"/><br/><br/>
+            <input id="buttonShowNonRewardedAd" type="button" style="background-color: #967ADC" value="Show Non-Rewarded Ad" onclick="adController.onClickShowNonRewardedAd(false);" class="demo"/><br/><br/> -->
+
+            <input type="button" style="background-color: #FCFCFC" value="Export Log" onclick="adController.exportLog();" class="demo-small"/><br/>
+        </div>
+
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/adDemoScreenController.js"></script>
+        <script type="text/javascript">
+            adController.initialize('DemoScreen1');
+        </script>
+    </body>
+</html>
