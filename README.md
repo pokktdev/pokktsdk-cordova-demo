@@ -3,13 +3,36 @@
 Before implementing plugins it is mandatory to go through project configuration and implementation steps , as these sections contain mandatory steps for basic SDK integration and are followed by every plugin.
 **ScreenName**: This one parameter is accepted by almost all API’s of Pokkt SDK. This controls the placement of ads and can be created on Pokkt Dashboard.
 There is a SampleApp demo app provided . We will be referencing this app during the course of explanation in this document. We suggest you go through the sample app for better understanding.
-##Project Configuration### DependenciesExtract the provided file “ PokktCordovaPlugin.zip ” into a directory. Execute the following command from your terminal:
+##Project Configuration (iOS)### DependenciesExtract the provided file “ PokktCordovaPlugin.zip ” into a directory. Execute the following command from your terminal:
 `$phonegap plugin add / < path-to-plugin-directory>/cordova-plugin-pokkt/`
 ###Required FrameworksOnce your project is built and the XCode project is exported, open this exported project using XCode. Ensure the followings frameworks are present(linked) inside project setting’s“ Build-Phases -> Link Binaries With Libraries ”, if not than add them manually:
 
 ~~~CoreData .frameworkFoundation .frameworkMediaPlayer .frameworkSystemConfiguration .frameworkUIKit .frameworkCoreTelephony .frameworkEventKit .frameworkAdSupport .frameworkCoreGraphics .frameworkAVFoundation .framework
 ~~~
-##Implementation Steps###SDK Configuration1. For all invocation of Pokkt SDK developer will make use of methods available in pokktAds.js file using PokktExtension object.2. Set Application Id and Security key in Pokkt SDK. You can get it from Pokkt dashboard from your account. We generally assign unique application Id and Security key.
+
+##Project Configuration (Android)###DependenciesExtract the provided file “ PokktCordovaPlugin.zip ” into a directory. Execute the following command from your terminal:`$phonegap plugin add / < path-to-plugin-directory>/PokktCordovaPlugin/`
+We expect Google play services integrated in project, although it;s optional but we recommend you to integrate it, as it’s required to fetch AdvertisingID for device,which is usefulto deliver targeted advertising to Android users.
+##Manifest###Permissions DeclarationsWe have added the following permissions to the manifest
+####1. Mandatory permissions.
+
+~~~<uses-permission android:name=“android.permission.INTERNET” /><uses-permission android:name=“android.permission.READ_PHONE_STATE” />
+~~~● **android.permission.INTERNET** = Required for SDK communication with server.<br>● **android.permission.READ_PHONE_STATE** = Required for creating unique identifier for you application based on the unique id of the device like IMEI.<br>
+
+####2. Optional permissions.
+	
+~~~<uses-permission android:name=“android.permission.ACCESS_NETWORK_STATE” /><uses-permission android:name=“android.permission.ACCESS_WIFI_STATE” /><uses-permission android:name=“android.permission.CHANGE_WIFI_STATE” /><uses-permission android:name=“android.permission.WAKE_LOCK” /><uses-permission android:name=“android.permission.WRITE_EXTERNAL_STORAGE” /><uses-permission android:name=“android.permission.WRITE_CALENDAR” /><uses-permission android:name=“android.permission.ACCESS_COARSE_LOCATION” /><uses-permission android:name=“android.permission.ACCESS_FINE_LOCATION” /><uses-permission android:name=“android.permission.CALL_PHONE” /><uses-permission android:name=“android.permission.SEND_SMS” />
+~~~
+● **android.permission.ACCESS_NETWORK_STATE** = Required to detect changes in network, like if WIFI is available or not.<br>
+	● **android.permission.ACCESS_WIFI_STATE** = Required to detect changes in network, like if WIFI is available or not.<br>● **android.permission.CHANGE_WIFI_STATE** = Required to detect changes in network, like if WIFI is available or not.<br>● a**ndroid.permission.WAKE_LOCK** = Required to prevent device from going into the sleep mode during video play.<br>● **android.permission.WRITE_EXTERNAL_STORAGE** = Required to store media files related to ads in external SD card, if not provided we will use app cache folder to store media files, which will result in unnecessary increase in application’s size. It isrecommended to ask for this permission as low end devices generally have less internally memory available.<br>● **android.permission.WRITE_CALENDAR** = Some Ads create events in calendar.<br>● **android.permission.ACCESS_COARSE_LOCATION** = Some Ads show content based on user’s location.<br>● **android.permission.ACCESS_FINE_LOCATION** = Some Ads show content based on user’s location<br>● **android.permission.CALL_PHONE** = Some Ads are interactive and they provide you a way to call directly from the content.<br>● **android.permission.SEND_SMS** = Some Ads are interactive and they provide you a way to send message.
+###Activity DeclarationAdd the following activity in your AndroidManifest for Pokkt SDK integration.
+
+~~~<activityandroid:name="com.pokkt.sdk.userinterface.presenter.activity.PokktAdActivity"android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"android:hardwareAccelerated="true"android:label=”Pokkt”android:screenOrientation="landscape"android:windowSoftInputMode="stateAlwaysHidden|adjustUnspecified" />
+
+~~~You can change the android:screenOrientation="landscape" to of your choice, the way you want to display the ads.###Service DeclarationWe have added the following service in your AndroidManifest for receiving InApp notifications.
+
+~~~<serviceandroid:name="com.pokkt.sdk.notification.NotificationService"android:exported="false"android:label="PokktNotificationService" />
+~~~
+##Implementation Steps (Generic)###SDK Configuration1. For all invocation of Pokkt SDK developer will make use of methods available in pokktAds.js file using PokktExtension object.2. Set Application Id and Security key in Pokkt SDK. You can get it from Pokkt dashboard from your account. We generally assign unique application Id and Security key.
 
 	~~~pe = window.plugin.pokktExtension;pe.setPokktConfig(“<Pokkt Application ID>”, “<Pokkt Security Key>”);
 	~~~3. If you are using server to server integration with Pokkt, you can also set Third Party UserId in pokktAds.
